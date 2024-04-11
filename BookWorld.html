@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book World</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Lien vers le fichier de styles CSS -->
+    <style>
+        /* Styles CSS supplémentaires pour ce site */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        section {
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Book World</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#posts">Posts</a></li>
+                <li><a href="#forums">Forums</a></li>
+                <li><a href="#writers">For Writers</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <!-- Section d'accueil du site -->
+        <h2>Discover a World of Books</h2>
+        <p>Welcome to Book World, where you can explore and share your love for books!</p>
+        <!-- Ajoutez d'autres éléments d'accueil, comme des suggestions de lecture, des citations, etc. -->
+    </section>
+
+    <section id="posts">
+        <!-- Section pour les publications -->
+        <h2>Latest Posts</h2>
+        <div id="post1">
+            <h3>Book Review: "Title of Book"</h3>
+            <p>Great book! I really enjoyed it.</p>
+            <button onclick="showComments('post1')">Show Comments</button>
+            <div id="comments-post1" style="display:none;">
+                <!-- Commentaires affichés ici -->
+            </div>
+            <textarea id="comment-post1"></textarea>
+            <button onclick="addComment('post1')">Add Comment</button>
+        </div>
+        <!-- Ajoutez d'autres publications avec des fonctionnalités de commentaires similaires -->
+    </section>
+
+    <section id="forums">
+        <!-- Section pour les forums de discussion -->
+        <h2>Discussion Forums</h2>
+        <div class="forum" id="general-forum">
+            <h3>General Discussions</h3>
+            <!-- Discussions générales chargées via AJAX -->
+        </div>
+        <div class="forum" id="series-forum">
+            <h3>Series Discussions</h3>
+            <!-- Discussions sur les séries chargées via AJAX -->
+        </div>
+        <!-- Ajoutez d'autres forums de discussion pour les différentes catégories de contenu -->
+    </section>
+
+    <section id="writers">
+        <!-- Section pour les écrivains -->
+        <h2>For Writers</h2>
+        <p>If you're a writer, you can share your novels and stories here!</p>
+        <form id="writer-form">
+            <label for="novel-title">Title:</label>
+            <input type="text" id="novel-title" name="novel-title"><br><br>
+            <label for="novel-content">Content:</label><br>
+            <textarea id="novel-content" name="novel-content" rows="4" cols="50"></textarea><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <section id="contact">
+        <!-- Section de contact -->
+        <h2>Contact Us</h2>
+        <p>Have questions or suggestions? Contact us!</p>
+        <!-- Ajoutez un formulaire de contact -->
+    </section>
+
+    <footer>
+        <!-- Pied de page -->
+        <p>&copy; 2024 Book World</p>
+    </footer>
+
+    <script>
+        function showComments(postId) {
+            var commentsDiv = document.getElementById("comments-" + postId);
+            commentsDiv.style.display = "block";
+            // Récupérer et afficher les commentaires depuis une source de données
+        }
+
+        function addComment(postId) {
+            var commentText = document.getElementById("comment-" + postId).value;
+            // Envoyer le commentaire à un serveur ou le stocker localement
+            // Actualiser la liste des commentaires
+        }
+
+        // Fonction pour afficher les commentaires
+        function showComments(postId) {
+            var commentsDiv = document.getElementById("comments-" + postId);
+            commentsDiv.style.display = "block";
+        }
+    
+        // Fonction pour ajouter un commentaire
+        function addComment(postId) {
+            var commentText = document.getElementById("comment-" + postId).value;
+            var commentsDiv = document.getElementById("comments-" + postId);
+    
+            // Créer un nouvel élément de commentaire
+            var newComment = document.createElement("p");
+            newComment.textContent = commentText;
+    
+            // Ajouter le commentaire à la section des commentaires
+            commentsDiv.appendChild(newComment);
+        }
+    </script> 
+    <script>
+    // Exemple de script pour charger les discussions du forum via AJAX
+function loadForumDiscussions() {
+      var xhr = new XMLHttpRequest();
+        xhr.open("GET", "forum_data.json", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var forumData = JSON.parse(xhr.responseText);
+                // Traiter les données du forum et les afficher sur la page
+            }
+        };
+        xhr.send();
+    } 
+    // Exemple de script pour valider et soumettre un formulaire d'article
+document.getElementById("article-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    var title = document.getElementById("article-title").value;
+    var content = document.getElementById("article-content").value;
+    // Valider les données du formulaire
+    if (title && content) {
+        // Envoyer les données du formulaire au serveur
+        // Rediriger l'utilisateur vers une page de confirmation
+    } else {
+        alert("Please fill in all fields.");
+    }
+});
+// Exemple de script pour valider et soumettre un formulaire d'article
+document.getElementById("article-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    var title = document.getElementById("article-title").value;
+    var content = document.getElementById("article-content").value;
+    // Valider les données du formulaire
+    if (title && content) {
+        // Envoyer les données du formulaire au serveur
+        // Rediriger l'utilisateur vers une page de confirmation
+    } else {
+        alert("Please fill in all fields.");
+    }
+});
+// Exemple de script pour gérer l'inscription des utilisateurs
+document.getElementById("signup-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    // Valider les données du formulaire
+    if (username && password) {
+        // Envoyer les données d'inscription au serveur
+        // Rediriger l'utilisateur vers une page de confirmation
+    } else {
+        alert("Please fill in all fields.");
+    }
+});
+
+// Exemple de script pour gérer la connexion des utilisateurs
+document.getElementById("login-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    // Valider les données du formulaire
+    if (username && password) {
+        // Envoyer les données de connexion au serveur
+        // Rediriger l'utilisateur vers une page d'accueil
+    } else {
+        alert("Please fill in all fields.");
+    }
+});
+// Exemple de script pour gérer la recherche
+document.getElementById("search-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    var keyword = document.getElementById("search-input").value;
+    // Envoyer la requête de recherche au serveur et afficher les résultats
+});
+// Exemple de script pour gérer le partage sur les réseaux sociaux
+document.getElementById("share-facebook").addEventListener("click", function () {
+    // Ouvrir une fenêtre de partage Facebook avec les données appropriées
+});
+
+document.getElementById("share-twitter").addEventListener("click", function () {
+    // Ouvrir une fenêtre de partage Twitter avec les données appropriées
+});
+
+// Et ainsi de suite pour d'autres réseaux sociaux...
+    </script>
+    
+</body>
+</html>
